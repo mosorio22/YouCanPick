@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>five three one</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+  </head>
+  <body>
+    {% extends "template.html" %}
+    {% block content %}
+    
+    <h1>
+    	Let's play 5-3-1!
+    </h1>
+
+    {% if first_run %}
+    <form action="{{ url_for("five_three_one")}}" method="POST">
+      <input type="text" name="input1" required>
+      <input type="text" name="input2" required>
+      <input type="text" name="input3" required>
+      <input type="text" name="input4" required>
+      <input type="text" name="input5" required>
+      <input type="submit" value="Submit">
+    </form>
+    {% endif %}
+
+    {% if second_run %}
+    <form action="{{ url_for("five_three_one")}}" method="POST">
+      <select>
+        <option value="{{first_place}}">{{first_place}}</option>
+        <option value="{{second_place}}">{{second_place}}</option>
+        <option value="{{third_place}}">{{third_place}}</option>
+      </select>
+      <input type="submit" value="Submit">
+    </form>
+    {% endif %}
+
+    {% if last_run %}
+    <p id="pick-me">{{random_restaurant}}</p>
+    {% endif %}
+    
+    {% endblock %}
+  </body>
+</html>
