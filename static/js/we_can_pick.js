@@ -1,4 +1,4 @@
-//home.js
+//we_can_pick.js
 
 function addMoreFields() {
 	var inputCount = document.getElementsByTagName('input').length;
@@ -8,7 +8,7 @@ function addMoreFields() {
 		input.name = "input" + inputCount;
 		input.type = "text";
 		input.required =true;
-		var form = document.getElementsByClassName('home-page-form')[0];
+		var form = document.getElementsByClassName('we-can-pick-page-form')[0];
 		form.insertBefore(input, addButton);
 	}
 	else {
