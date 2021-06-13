@@ -15,8 +15,8 @@
     </h1>
 
     <form class="home-page-form" action="{{ url_for("home")}}" method="POST">
-      <input type="text" required>
-      <button class="add-more" onclick="addMoreFields()">Add More Options</button>
+      <input type="text" name="input1" required>
+      <button type="button" class="add-more" onclick="addMoreFields()">Add More Options</button>
       <input type="submit" value="Submit">
     </form>
 
