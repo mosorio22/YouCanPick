@@ -6,7 +6,7 @@ import random
 from pyzipcode import ZipCodeDatabase
 
 def you_can_pick(zip_code):
-	api_key = 'your key goes here'
+	api_key = 'api key goes here'
 	headers = {'Authorization': 'Bearer {}'.format(api_key)}
 
 	search_api_url = 'https://api.yelp.com/v3/businesses/search'
