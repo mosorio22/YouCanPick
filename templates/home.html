@@ -16,14 +16,26 @@
       Having trouble picking where to eat? We can't blame you! There are so may amazing options to choose from these days, it can feel overwhelming. With YouCanPick, we hope you can have a great eating experience without having to spend all that time deciding where to eat next. Indecisive, bored of all the usual options, or just feeling adventurous? YouCanPick is for you! 
     </p>
 
-    <form class="home-page-form" action="{{ url_for("home")}}" method="POST">
+    <form id="home-page-form" action="{{ url_for("home")}}" method="POST">
       <label for="zip-code">Please input your zip code here</label>
       <input type="text" name="zip-code" id="zip-code" required>
+      <label for="price">Do you have a price in mind?</label>
+      <select name="price" id="price" form="home-page-form">
+        <option value=""> </option>
+        <option value="1">$</option>
+        <option value="2">$$</option>
+        <option value="3">$$$</option>
+        <option value="4">$$$$</option>
+        <option value="5">$$$$$</option>
+      </select>
+      <br>
+      <label for="reservation">Click here if you want an option that takes reservations</label>
+      <input type="radio" id="reservation" name="reservation" value="reservation">
       <input type="submit" value="Submit">
     </form>
 
     {% if random_restaurant %}
-    <p id="pick-me">{{random_restaurant}}</p>
+    <p id="pick-me">{{random_restaurant["name"]}}</p>
     {% endif %}
     
     {% endblock %}

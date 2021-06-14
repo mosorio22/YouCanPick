@@ -12,8 +12,7 @@ app = Flask(__name__)
 def home():
 	if request.method == "POST":
 		request_data = request.form
-		zip_code = request_data.get("zip-code")
-		random_restaurant = you_can_pick(zip_code)
+		random_restaurant = you_can_pick(request_data)
 		return render_template("home.html", random_restaurant =  random_restaurant)
 	return render_template("home.html")
 

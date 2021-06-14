@@ -8,7 +8,7 @@ function addMoreFields() {
 		input.name = "input" + inputCount;
 		input.type = "text";
 		input.required =true;
-		var form = document.getElementsByClassName('we-can-pick-page-form')[0];
+		var form = document.getElementById('we-can-pick-page-form');
 		form.insertBefore(input, addButton);
 	}
 	else {
