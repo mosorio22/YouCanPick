@@ -1,0 +1,14 @@
+input {
+	margin: 8px 0;
+	display: block;
+}
+
+input[type=text]:focus {
+  border: 3px solid #555;
+}
+
+#pick-me {
+	text-align: center;
+	font-size: 40px;
+	font-weight: bold;
+}

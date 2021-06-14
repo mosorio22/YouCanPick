@@ -1,12 +1,20 @@
 from flask import Flask, render_template, request
 import random
-
+import sys, os
+sys.path.append(os.path.join(os.path.dirname(__file__), 'src'))
+import src
+from you_can_pick import you_can_pick
 app = Flask(__name__)
 
 
 #home page
-@app.route("/")
+@app.route("/", methods=['GET', 'POST'])
 def home():
+	if request.method == "POST":
+		request_data = request.form
+		zip_code = request_data.get("zip-code")
+		random_restaurant = you_can_pick(zip_code)
+		return render_template("home.html", random_restaurant =  random_restaurant)
 	return render_template("home.html")
 
 #we can pick page
