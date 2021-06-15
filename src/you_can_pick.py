@@ -17,16 +17,18 @@ def you_can_pick(specs):
 	city = zipcode.city
 	state = zipcode.state
 	location = city + ", " + state
-	params = {'term': 'restaurant', 'open_now': True, 'location': location}
+	params = {'term': 'restaurant', 'open_now': True, 'location': location, 'categories': 'mediterranean'}
 	price = specs.get("price")
 	reservation = specs.get("reservation")
+	category = specs.get("category")
 	if price != "":
 		params["price"] = price
-	if reservation != "":
+	if reservation != "" and reservation != None:
 		params["attributes"] = reservation
+	if category != "":
+		params["categories"] = category
 	response = requests.get(search_api_url, headers=headers, params=params, timeout=5)
 	eateries = response.json()["businesses"]
 	random_restaurant = random.choice(list(eateries))
-	print(random_restaurant)
 	return random_restaurant
 
