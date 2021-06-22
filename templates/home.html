@@ -18,7 +18,7 @@
 
     <form id="home-page-form" action="{{ url_for("home")}}" method="POST">
       <label for="zip-code">Please input your zip code here</label>
-      <input type="text" name="zip-code" id="zip-code" required>
+      <input type="text" name="zip-code" id="zip-code" pattern="[0-9]*" required>
       <label for="price">Do you have a price in mind?</label>
       <select name="price" id="price" form="home-page-form">
         <option value=""> </option>
@@ -30,7 +30,7 @@
       </select>
       <br>
       <label for="reservation">Click here if you want an option that takes reservations</label>
-      <input type="radio" id="reservation" name="reservation" value="reservation">
+      <input type="checkbox" id="reservation" name="reservation" value="reservation">
       <label for="category">Want anything specific? Here are some popular categories</label>
       <select name="category" id="category" form="home-page-form">
         <option value=""> </option>
@@ -60,6 +60,10 @@
 
     {% if random_restaurant %}
     <p id="pick-me">{{random_restaurant["name"]}}</p>
+    {% endif %}
+
+    {% if invalid %}
+    <p id="pick-me">Sorry, we were unable to find the specified zip code.</p>
     {% endif %}
     
     {% endblock %}

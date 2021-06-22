@@ -45,6 +45,7 @@ def get_category(api_key, search_keyword):
 
 
 def you_can_pick(specs):
+<<<<<<< HEAD
     api_key = get_api_key()
     headers = {'Authorization': 'Bearer {}'.format(api_key)}
     search_api_url = 'https://api.yelp.com/v3/businesses/search'
@@ -86,7 +87,6 @@ def you_can_pick(specs):
                         any(category in y['alias'] for y in x['categories'])]
 
         random_restaurant = random.choice(list(eateries))
-
         return random_restaurant
     #invalid zip code block
     else:

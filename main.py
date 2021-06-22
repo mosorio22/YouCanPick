@@ -13,7 +13,11 @@ def home():
 	if request.method == "POST":
 		request_data = request.form
 		random_restaurant = you_can_pick(request_data)
-		return render_template("home.html", random_restaurant =  random_restaurant)
+		# invalid zip code block
+		if random_restaurant == "invalid":
+			return render_template("home.html", invalid = random_restaurant)
+		else:
+			return render_template("home.html", random_restaurant =  random_restaurant)
 	return render_template("home.html")
 
 #we can pick page
