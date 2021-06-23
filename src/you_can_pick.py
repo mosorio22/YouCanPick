@@ -32,31 +32,15 @@ def get_category(api_key, search_keyword):
         return None
 
     # Get all Yelp categories
-    request_url = 'https://api.yelp.com/v3/categories'
-    headers = {'Authorization': 'Bearer {}'.format(api_key)}
-    # params = {'locale': 'en_US'}
-    params = {}
-    response = requests.get(request_url, headers=headers, params=params, timeout=5)
-    response_body = response.json()
-
-    # Get relevant Yelp categories
-    target = ['restaurants']
-    categories = []
-    while target:
-        r = [x for x in response_body['categories'] if any(y in x['parent_aliases'] for y in target)]
-        categories.extend([(x['title'], x['alias']) for x in r])
-        # Get subcategories
-        target = [x['alias'] for x in r]
+    categories = get_restaurant_categories()
 
     # Fuzzy match on search keyword
-    best_match = process.extractOne(search_keyword, [x[0] for x in categories])[0]
-    best_match_alias = [x[1] for x in categories if x[0] == best_match][0]
+    best_match = process.extractOne(search_keyword, [x for x in categories])[0]
 
-    return best_match_alias
+    return best_match
 
 
 def you_can_pick(specs):
-    get_restaurant_categories()
     api_key = get_api_key()
     headers = {'Authorization': 'Bearer {}'.format(api_key)}
     search_api_url = 'https://api.yelp.com/v3/businesses/search'
@@ -83,15 +67,12 @@ def you_can_pick(specs):
     if reservation:
         params["attributes"] = reservation
     if category:
+        print(category)
         params["categories"] = category
 
     response = requests.get(search_api_url, headers=headers, params=params, timeout=5)
-    if not category:
-        eateries = response.json()["businesses"]
-    else:
-        # Only return eateries with user-specified category
-        eateries = [x for x in response.json()["businesses"] if
-                    any(category in y['alias'] for y in x['categories'])]
+    eateries = response.json()["businesses"]
 
     random_restaurant = random.choice(list(eateries))
+    print(random_restaurant)
     return random_restaurant
