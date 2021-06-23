@@ -6,10 +6,11 @@ import random
 from pyzipcode import ZipCodeDatabase
 import json
 from fuzzywuzzy import process
+import os.path
 
 
 def get_api_key():
-    with open('resources/api.json', 'r') as fp:
+    with open(os.path.dirname(__file__) + '/../resources/api.json', 'r') as fp:
         j = json.load(fp)
         api_key = j['api_key']
 
@@ -45,49 +46,41 @@ def get_category(api_key, search_keyword):
 
 
 def you_can_pick(specs):
-<<<<<<< HEAD
     api_key = get_api_key()
     headers = {'Authorization': 'Bearer {}'.format(api_key)}
     search_api_url = 'https://api.yelp.com/v3/businesses/search'
 
     zip_code = specs.get("zip-code")
     zcdb = ZipCodeDatabase()
-    try:
-        zcdb_metadata = zcdb[zip_code]
-    except:
-        zcdb_metadata = "invalid"
+    zcdb_metadata = zcdb[zip_code]
 
-    if zcdb_metadata != "invalid":
-        # Get location
-        city = zcdb_metadata.city
-        state = zcdb_metadata.state
-        location = city + ", " + state
+    # Get location
+    city = zcdb_metadata.city
+    state = zcdb_metadata.state
+    location = city + ", " + state
 
-        # Get category
-        category = get_category(api_key, specs.get("category"))
+    # Get category
+    category = get_category(api_key, specs.get("category"))
 
-        # Execute Yelp business search
-        params = {'term': 'restaurant', 'open_now': True, 'location': location}
-        price = specs.get("price")
-        reservation = specs.get("reservation")
+    # Execute Yelp business search
+    params = {'term': 'restaurant', 'open_now': True, 'location': location}
+    price = specs.get("price")
+    reservation = specs.get("reservation")
 
-        if price:
-            params["price"] = price
-        if reservation:
-            params["attributes"] = reservation
-        if category:
-            params["categories"] = category
+    if price:
+        params["price"] = price
+    if reservation:
+        params["attributes"] = reservation
+    if category:
+        params["categories"] = category
 
-        response = requests.get(search_api_url, headers=headers, params=params, timeout=5)
-        if not category:
-            eateries = response.json()["businesses"]
-        else:
-            # Only return eateries with user-specified category
-            eateries = [x for x in response.json()["businesses"] if
-                        any(category in y['alias'] for y in x['categories'])]
-
-        random_restaurant = random.choice(list(eateries))
-        return random_restaurant
-    #invalid zip code block
+    response = requests.get(search_api_url, headers=headers, params=params, timeout=5)
+    if not category:
+        eateries = response.json()["businesses"]
     else:
-        return zcdb_metadata
+        # Only return eateries with user-specified category
+        eateries = [x for x in response.json()["businesses"] if
+                    any(category in y['alias'] for y in x['categories'])]
+
+    random_restaurant = random.choice(list(eateries))
+    return random_restaurant
