@@ -40,8 +40,8 @@
     <p id="pick-me">{{random_restaurant["name"]}}</p>
     {% endif %}
 
-    {% if invalid %}
-    <p id="pick-me">Sorry, we were unable to find the specified zip code.</p>
+    {% if e %}
+    <p id="pick-me">{{e}}</p>
     {% endif %}
     
     {% endblock %}
