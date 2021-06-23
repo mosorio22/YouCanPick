@@ -30,7 +30,7 @@ def get_category(api_key, search_keyword):
     response_body = response.json()
 
     # Get relevant Yelp categories
-    target = ['food', 'restaurants']
+    target = ['restaurants']
     categories = []
     while target:
         r = [x for x in response_body['categories'] if any(y in x['parent_aliases'] for y in target)]
