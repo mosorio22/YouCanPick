@@ -128,5 +128,5 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-#folder with api key
-resources/
+#api key
+resources/api.json

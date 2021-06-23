@@ -16,6 +16,16 @@ def get_api_key():
 
     return api_key
 
+def get_restaurant_categories():
+    with open(os.path.dirname(__file__) + '/../resources/categories.json', 'r') as fp:
+        j = json.load(fp)
+        restaurant_categories = []
+        for i in range(0, len(list(j))):
+            if "restaurants" in j[i]["parents"]:
+                restaurant_categories.append(j[i]["alias"])
+
+    return restaurant_categories
+
 
 def get_category(api_key, search_keyword):
     if not search_keyword:
@@ -46,6 +56,7 @@ def get_category(api_key, search_keyword):
 
 
 def you_can_pick(specs):
+    get_restaurant_categories()
     api_key = get_api_key()
     headers = {'Authorization': 'Bearer {}'.format(api_key)}
     search_api_url = 'https://api.yelp.com/v3/businesses/search'
