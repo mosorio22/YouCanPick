@@ -16,23 +16,18 @@ def get_api_key():
 
     return api_key
 
-def get_restaurant_categories():
-    with open(os.path.dirname(__file__) + '/../resources/categories.json', 'r') as fp:
-        j = json.load(fp)
-        restaurant_categories = []
-        for i in range(0, len(list(j))):
-            if "restaurants" in j[i]["parents"]:
-                restaurant_categories.append(j[i]["alias"])
-
-    return restaurant_categories
-
 
 def get_category(api_key, search_keyword):
     if not search_keyword:
         return None
 
     # Get all Yelp categories
-    categories = get_restaurant_categories()
+    with open(os.path.dirname(__file__) + '/../resources/categories.json', 'r') as fp:
+        j = json.load(fp)
+        categories = []
+        for i in range(0, len(list(j))):
+            if "restaurants" in j[i]["parents"]:
+                categories.append(j[i]["alias"])
 
     # Fuzzy match on search keyword
     best_match = process.extractOne(search_keyword, [x for x in categories])[0]
@@ -67,12 +62,10 @@ def you_can_pick(specs):
     if reservation:
         params["attributes"] = reservation
     if category:
-        print(category)
         params["categories"] = category
 
     response = requests.get(search_api_url, headers=headers, params=params, timeout=5)
     eateries = response.json()["businesses"]
 
     random_restaurant = random.choice(list(eateries))
-    print(random_restaurant)
     return random_restaurant
