@@ -37,7 +37,11 @@
     </form>
 
     {% if random_restaurant %}
-    <p id="pick-me">{{random_restaurant["name"]}}</p>
+    <div id="pick-me">
+      <p>{{random_restaurant["name"]}}</p>
+      <img src="{{random_restaurant['image_url']}}" id="restaurant-image">
+      <p>{{random_restaurant["location"]["address1"]}}, {{random_restaurant["location"]["city"]}}, {{random_restaurant["location"]["state"]}} {{random_restaurant["location"]["zip_code"]}}</p>
+    </div>
     {% endif %}
 
     {% if e %}

@@ -12,3 +12,8 @@ input[type=text]:focus {
 	font-size: 40px;
 	font-weight: bold;
 }
+
+#restaurant-image {
+	max-width: 15%;
+	height: auto;
+}
