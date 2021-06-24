@@ -68,5 +68,4 @@ def you_can_pick(specs):
     eateries = response.json()["businesses"]
 
     random_restaurant = random.choice(list(eateries))
-    print(random_restaurant)
     return random_restaurant
