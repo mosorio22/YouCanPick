@@ -17,3 +17,8 @@ input[type=text]:focus {
 	max-width: 15%;
 	height: auto;
 }
+
+#price {
+	display: block;
+	margin-bottom: 8px;
+}
