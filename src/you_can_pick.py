@@ -3,7 +3,6 @@
 
 import requests
 import random
-from pyzipcode import ZipCodeDatabase
 import json
 from fuzzywuzzy import process
 import os.path
@@ -40,27 +39,36 @@ def you_can_pick(specs):
     headers = {'Authorization': 'Bearer {}'.format(api_key)}
     search_api_url = 'https://api.yelp.com/v3/businesses/search'
 
-    zip_code = specs.get("zip-code")
-    zcdb = ZipCodeDatabase()
-    zcdb_metadata = zcdb[zip_code]
 
     # Get location
-    city = zcdb_metadata.city
-    state = zcdb_metadata.state
-    location = city + ", " + state
+    location = specs.get("zip-code")
+    address = specs.get("address")
+    city = specs.get("city")
+    state = specs.get("state")
 
-    # Get category
-    category = get_category(api_key, specs.get("category"))
+    if state:
+        location = state + " "  + location
+    if city:
+        location = city + ", " + location
+    if address:
+        location = address +", " + location
+
 
     # Execute Yelp business search
     params = {'term': 'restaurant', 'open_now': True, 'location': location}
+
+    distance = specs.get("distance")
     price = specs.get("price")
     reservation = specs.get("reservation")
-
+    category = get_category(api_key, specs.get("category"))
     if price:
         params["price"] = price
     if reservation:
         params["attributes"] = reservation
+    if distance:
+        #convert miles to meters
+        distance = int(distance) * 1609
+        params["radius"] = distance
     if category:
         params["categories"] = category
 
