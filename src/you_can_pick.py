@@ -58,11 +58,19 @@ def you_can_pick(specs):
     params = {'term': 'restaurant', 'open_now': True, 'location': location}
 
     distance = specs.get("distance")
-    price = specs.get("price")
     reservation = specs.get("reservation")
     category = get_category(api_key, specs.get("category"))
-    if price:
-        params["price"] = price
+
+    #create price
+    min_price = specs.get("min-price")
+    max_price = specs.get("max-price")
+    if min_price and max_price:
+        #create comma separated string of prices
+        price = list(range(int(min_price), int(max_price) + 1))
+        price = ", ".join(map(str, price))
+    else:
+        price = "1, 2, 3, 4"
+
     if reservation:
         params["attributes"] = reservation
     if distance:
@@ -71,6 +79,8 @@ def you_can_pick(specs):
         params["radius"] = distance
     if category:
         params["categories"] = category
+    if price:
+        params["price"] = price
 
     response = requests.get(search_api_url, headers=headers, params=params, timeout=5)
     eateries = response.json()["businesses"]

@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>Home</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <script src="../static/js/home.js"></script>
   </head>
   <body>
     {% extends "template.html" %}
@@ -27,15 +28,12 @@
       <input type="text" name="state" id="state">
       <label for="distance">Let us know how far away we should be searching (in miles please)</label>
       <input type="number" step="1" max="24" min="1" name="distance" id="distance">
-      <label for="price">Do you have a price in mind?</label>
-      <select name="price" id="price" form="home-page-form">
-        <option value=""> </option>
-        <option value="1">$</option>
-        <option value="2">$$</option>
-        <option value="3">$$$</option>
-        <option value="4">$$$$</option>
-        <option value="5">$$$$$</option>
-      </select>
+      <p>Do you have a price range in mind?</p>
+      <section class="range-slider">
+      	<span class="rangeValues"></span>
+  		<input value="1" min="1" max="4" name="min-price" id="min-price" type="range">
+  		<input value="4" min="1" max="4" name="max-price" id="max-price" type="range">
+  	  </section>
       <label for="reservation">Click here if you want an option that takes reservations</label>
       <input type="checkbox" id="reservation" name="reservation" value="reservation">
       <label for="category">Want anything specific? Let us know!</label>
