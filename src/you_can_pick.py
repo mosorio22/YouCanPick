@@ -6,17 +6,14 @@ import random
 import json
 from fuzzywuzzy import process
 import os.path
+from dotenv import load_dotenv
+
+# Load environment variables from .env
+load_dotenv()
+YELP_FUSION_API_KEY = os.getenv('YELP_FUSION_API_KEY')
 
 
-def get_api_key():
-    with open(os.path.dirname(__file__) + '/../resources/api.json', 'r') as fp:
-        j = json.load(fp)
-        api_key = j['api_key']
-
-    return api_key
-
-
-def get_category(api_key, search_keyword):
+def get_category(search_keyword):
     if not search_keyword:
         return None
 
@@ -35,10 +32,8 @@ def get_category(api_key, search_keyword):
 
 
 def you_can_pick(specs):
-    api_key = get_api_key()
-    headers = {'Authorization': 'Bearer {}'.format(api_key)}
+    headers = {'Authorization': 'Bearer {}'.format(YELP_FUSION_API_KEY)}
     search_api_url = 'https://api.yelp.com/v3/businesses/search'
-
 
     # Get location
     location = specs.get("zip-code")
@@ -47,25 +42,24 @@ def you_can_pick(specs):
     state = specs.get("state")
 
     if state:
-        location = state + " "  + location
+        location = state + " " + location
     if city:
         location = city + ", " + location
     if address:
-        location = address +", " + location
-
+        location = address + ", " + location
 
     # Execute Yelp business search
     params = {'term': 'restaurant', 'open_now': True, 'location': location}
 
     distance = specs.get("distance")
     reservation = specs.get("reservation")
-    category = get_category(api_key, specs.get("category"))
+    category = get_category(specs.get("category"))
 
-    #create price
+    # create price
     min_price = specs.get("min-price")
     max_price = specs.get("max-price")
     if min_price and max_price:
-        #create comma separated string of prices
+        # create comma separated string of prices
         price = list(range(int(min_price), int(max_price) + 1))
         price = ", ".join(map(str, price))
     else:
@@ -74,7 +68,7 @@ def you_can_pick(specs):
     if reservation:
         params["attributes"] = reservation
     if distance:
-        #convert miles to meters
+        # convert miles to meters
         distance = int(distance) * 1609
         params["radius"] = distance
     if category:
