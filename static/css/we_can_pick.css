@@ -12,3 +12,11 @@ input[type=text]:focus {
 	font-size: 40px;
 	font-weight: bold;
 }
+
+form, p {
+	padding-left: 1em;
+}
+
+h1 {
+	text-align: center;
+}
