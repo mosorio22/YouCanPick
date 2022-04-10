@@ -1,28 +1,21 @@
 body {
 	background-color: seashell;
-}
-
-.logo {
-	padding: 10px;
-	background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(50,200,196,1) 37%, rgba(0,212,255,1) 100%);
-	text-align: center;
-	font-size: 40px;
-	font-weight: bold;
+  margin: 0px;
 }
 
 /* topnav */
 .topnav {
   background-color: #333;
-  overflow: hidden;
+  white-space: nowrap;
 }
 
 .topnav a {
-  float: left;
+  display: inline-block;
   color: #f2f2f2;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
-  font-size: 17px;
+  font-size: 1.5em;
 }
 
 .topnav a:hover {
@@ -33,6 +26,14 @@ body {
 .topnav a.active {
   background-color: #04AA6D;
   color: white;
+}
+
+.topnav strong {
+  display: inline-block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  font-size: 1.5em;
 }
 
 /*end topnav */
