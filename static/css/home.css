@@ -14,7 +14,7 @@ input[type=text]:focus {
 }
 
 #restaurant-image {
-	max-width: 15%;
+	max-width: 30%;
 	height: auto;
 }
 
@@ -86,5 +86,15 @@ h1 {
 
 #home-page-form {
   padding-left: 1em;
-  float: left;
+}
+
+@media (min-width: 768px) {
+  #home-page-form {
+    float: left;
+  }
+  
+  #restaurant-image {
+    max-width: 15%;
+    height: auto;
+  }
 }
