@@ -11,7 +11,6 @@ body {
   white-space: nowrap;
 }
 
-/* todo - make navbar into hamburger menu */
 @media (min-width: 450px) {
   .topnav {
     display: flex;
