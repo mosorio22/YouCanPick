@@ -79,3 +79,17 @@ section.range-slider input:last-of-type::-moz-range-track {
   section.range-slider input[type=range]::-moz-focus-outer {
   border: 0;
 }
+
+h1 {
+  text-align: center;
+  font-size: 3em;
+}
+@media (min-width: 768px) {
+  h1 {
+    font-size: 2em;
+  }
+}
+
+#home-page-form {
+  padding-left: 1em;
+}
