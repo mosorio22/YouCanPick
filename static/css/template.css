@@ -4,13 +4,20 @@ body {
 }
 
 /* topnav */
+
 .topnav {
+  display: inline-flex;
   background-color: #333;
   white-space: nowrap;
 }
 
+@media (min-width: 450px) {
+  .topnav {
+    display: flex;
+  }
+}
+
 .topnav a {
-  display: inline-block;
   color: #f2f2f2;
   text-align: center;
   padding: 14px 16px;
@@ -29,7 +36,6 @@ body {
 }
 
 .topnav strong {
-  display: inline-block;
   color: #f2f2f2;
   text-align: center;
   padding: 14px 16px;
