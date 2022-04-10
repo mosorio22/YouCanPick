@@ -20,6 +20,8 @@ NOTE: To use this web app's home page search feature, a Yelp api key is needed.
 ```
 4. **Do not commit `api.json` to the Git repo. This file should be stored locally for security purposes.**
 
+#### TODO
+Make fully responsive
 
 License:
 MIT
