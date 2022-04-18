@@ -6,12 +6,12 @@ body {
 /* topnav */
 
 .topnav {
-  display: inline-flex;
+  display:none;
   background-color: #333;
   white-space: nowrap;
 }
 
-@media (min-width: 450px) {
+@media (min-width: 768px) {
   .topnav {
     display: flex;
   }
@@ -43,3 +43,42 @@ body {
 }
 
 /*end topnav */
+
+/*sidenav*/
+.sidenav {
+  display: inline-flex;
+  overflow: hidden;
+  background-color: #333;
+}
+
+@media (min-width: 767px) {
+  .sidenav {
+    display: none;
+  }
+}
+
+.sidenav #myLinks {
+  display: none;
+}
+
+.sidenav a {
+  color: white;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  display: block;
+}
+
+.sidenav a.icon {
+  background: black;
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 0.75em;
+}
+
+.active {
+  background-color: #04AA6D;
+  color: white;
+}
